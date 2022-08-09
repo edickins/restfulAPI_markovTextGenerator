@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const { request } = require('express');
+const morgan = require('morgan');
 
 // routes
 const markovtext = require('./routes/markovtext');
@@ -9,6 +10,11 @@ const markovtext = require('./routes/markovtext');
 dotenv.config({ path: './config/config.env' });
 
 const app = express();
+
+// dev logging middleware
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
+}
 
 // mount routes
 app.use('/api/v1/markovtext/', markovtext);
