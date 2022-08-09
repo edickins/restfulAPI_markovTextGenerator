@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { getMarkovText } = require('../controllers/markovtext');
 
-router.get('/', (req, res) => {
-	res.status(200).json({ success: true, msg: 'request markovtext' });
-});
+router.route('/').get(getMarkovText);
 
 module.exports = router;
