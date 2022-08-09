@@ -1,0 +1,27 @@
+{
+	"name": "restfulapi_markovtextgenerator",
+	"version": "1.0.0",
+	"description": "markov text generator backend api",
+	"main": "server.js",
+	"scripts": {
+		"start": "SET NODE_ENV=production node server",
+		"dev": "nodemon server"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/edickins/restfulAPI_markovTextGenerator.git"
+	},
+	"author": "ecdickins",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/edickins/restfulAPI_markovTextGenerator/issues"
+	},
+	"homepage": "https://github.com/edickins/restfulAPI_markovTextGenerator#readme",
+	"dependencies": {
+		"dotenv": "^16.0.1",
+		"express": "^4.18.1"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.19"
+	}
+}
