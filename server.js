@@ -6,6 +6,7 @@ const morgan = require('morgan');
 
 // routes
 const markovtext = require('./routes/markovtext');
+const ascii = require('./routes/ascii');
 
 // Load in env vars
 dotenv.config({ path: './config/config.env' });
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // mount routes
 app.use('/api/v1/markovtext/', markovtext);
+app.use('/api/v1/ascii/', ascii);
 
 const PORT = process.env.PORT || 3000;
 

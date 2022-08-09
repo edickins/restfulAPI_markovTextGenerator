@@ -4,7 +4,7 @@
 	"description": "markov text generator backend api",
 	"main": "server.js",
 	"scripts": {
-		"start": "SET NODE_ENV=production node server",
+		"start": "NODE_ENV=production node server",
 		"dev": "nodemon server"
 	},
 	"repository": {
@@ -21,6 +21,7 @@
 		"colors": "^1.4.0",
 		"dotenv": "^16.0.1",
 		"express": "^4.18.1",
+		"markov-chain-nlg": "^1.0.3",
 		"morgan": "^1.10.0"
 	},
 	"devDependencies": {
