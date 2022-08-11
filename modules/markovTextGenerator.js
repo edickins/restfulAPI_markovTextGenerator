@@ -13,7 +13,7 @@ function _getText(initObj) {
 	const {
 		SeedName: seedName = 'git',
 		// MaxLength: maxLength = 200,
-		ItemCount: itemCount = 10,
+		ItemCount: itemCount = 1,
 	} = initObj;
 	console.log(`SeedName ${seedName}`);
 

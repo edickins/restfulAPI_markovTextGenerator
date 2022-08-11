@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const { request } = require('express');
 const colors = require('colors');
 const morgan = require('morgan');
+const bodyparser = require('body-parser');
 
 // routes
 const markovtext = require('./routes/markovtext');
@@ -28,11 +29,14 @@ app.use((req, res, next) => {
 	next();
 });
 
+// parse the body of the response
+app.use(express.json());
+
 // mount routes
 app.use('/api/v1/markovtext/', markovtext);
 app.use('/api/v1/ascii/', ascii);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const server = app.listen(
 	PORT,
