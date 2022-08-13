@@ -28,7 +28,7 @@ function _getText(initObj) {
 			for (let i = 0; i < itemCount; i++) {
 				const txt = _getTextToLength(MAX_TEXT_LENGTH);
 				returnObj.items.push({ txt: txt });
-				console.log(`txt: ${txt}`);
+				// console.log(`txt: ${txt}`);
 			}
 			resolve(returnObj);
 		});

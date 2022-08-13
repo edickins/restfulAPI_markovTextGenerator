@@ -7,7 +7,6 @@ const generator = require('../modules/markovTextGenerator.js');
 // @access  public
 exports.getMarkovText = (req, res, next) => {
 	generator.getText({}).then(texts => {
-		console.log('sending response : ' + texts);
 		res.status(200).json({ success: true, texts: texts });
 	});
 };
