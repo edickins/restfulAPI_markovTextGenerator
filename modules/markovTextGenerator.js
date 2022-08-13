@@ -4,17 +4,23 @@ const DEFAULT_TEXT_LENGTH = 80;
 
 const _getText = async () => {
 	return new Promise((resolve, reject) => {
-		MarkovChain.trainTxt('./data/text/hard/apache.txt', '\n').then(
-			MarkovChain.trainTxt('./data/text/soft/recipes.txt', '\n').then(() => {
-				const returnObj = {};
-				returnObj.items = [];
-				const txt = _getTextToLength(MAX_TEXT_LENGTH);
-				returnObj.items.push({ txt: txt });
-				// console.log(`txt: ${txt}`);
-
-				resolve(returnObj);
-			})
+		const trainingTexts = [];
+		trainingTexts.push(
+			MarkovChain.trainTxt('./data/text/hard/apache.txt', '\n')
 		);
+		trainingTexts.push(
+			MarkovChain.trainTxt('./data/text/soft/recipes.txt', '\n')
+		);
+
+		Promise.all(trainingTexts).then(() => {
+			const returnObj = {};
+			returnObj.items = [];
+			const txt = _getTextToLength(MAX_TEXT_LENGTH);
+			returnObj.items.push({ txt: txt });
+			// console.log(`txt: ${txt}`);
+
+			resolve(returnObj);
+		});
 	});
 };
 
