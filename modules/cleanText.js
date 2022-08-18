@@ -5,6 +5,6 @@ fs.readFile('../data/text/soft/diy.txt', 'utf8', (err, data) => {
 
 	match = data.match(pattern);
 	if (match) {
-		console.log(match);
+		//console.log(match);
 	}
 });

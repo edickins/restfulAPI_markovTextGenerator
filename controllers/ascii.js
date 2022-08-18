@@ -1,4 +1,3 @@
-const express = require('express');
 const generator = require('../modules/asciiGenerator.js');
 
 // @desc    return text generated from the default markov text sources
@@ -11,5 +10,5 @@ exports.getMarkovText = (req, res, next) => {
 		folderName: 'ascii',
 	};
 	// return a Promise
-	res.status(200).json(generator.getText({}));
+	res.status(200).json({ success: true, texts: generator.getText({}) });
 };

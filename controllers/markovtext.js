@@ -1,5 +1,3 @@
-const { text } = require('express');
-const express = require('express');
 const generator = require('../modules/markovTextGenerator.js');
 
 // @desc    return text generated from the default markov text sources
