@@ -4,7 +4,10 @@ const generator = require('../modules/markovTextGenerator.js');
 // @route   GET /api/v1/markovtext
 // @access  public
 exports.getMarkovText = (req, res, next) => {
-	generator.getText({}).then(texts => {
+	// copy request.query
+	const reqQuery = { ...req.query };
+	console.log(reqQuery);
+	generator.getText(reqQuery).then(texts => {
 		res.status(200).json({ success: true, texts: texts });
 	});
 };
