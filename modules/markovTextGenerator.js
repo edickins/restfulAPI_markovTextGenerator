@@ -3,10 +3,8 @@ const MAX_TEXT_LENGTH = 160;
 const DEFAULT_TEXT_LENGTH = 80;
 
 const _getText = async reqQuery => {
-	let { num } = reqQuery;
+	let { num = 1 } = reqQuery;
 	num = num * 1;
-	num = num && !isNaN(num) ? num : 1;
-	console.log(`num ${num}`);
 	return new Promise((resolve, reject) => {
 		const trainingTexts = [];
 		trainingTexts.push(
@@ -23,11 +21,6 @@ const _getText = async reqQuery => {
 			const texts = [...Array(num)].map(() => {
 				return { txt: _getTextToLength(MAX_TEXT_LENGTH) };
 			});
-
-			const txt = _getTextToLength(MAX_TEXT_LENGTH);
-			// returnObj.items.push({ txt: txt });
-			// console.log(`txt: ${txt}`);
-
 			returnObj.items = texts;
 
 			resolve(returnObj);
