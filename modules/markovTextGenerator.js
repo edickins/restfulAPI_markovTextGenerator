@@ -21,7 +21,7 @@ const _getText = async reqQuery => {
 			const texts = [...Array(num)].map(() => {
 				return { txt: _getTextToLength(MAX_TEXT_LENGTH) };
 			});
-			returnObj.items = texts;
+			returnObj.data = texts;
 
 			resolve(returnObj);
 		});
