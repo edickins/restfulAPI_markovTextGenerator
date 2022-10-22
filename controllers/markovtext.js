@@ -1,4 +1,6 @@
 const generator = require('../modules/markovTextGenerator.js');
+const fsExtra = require('fs-extra');
+const formidable = require('formidable');
 
 // @desc    return text generated from the default markov text sources
 // @route   GET /api/v1/markovtext
@@ -12,4 +14,49 @@ exports.getMarkovText = async (req, res, next) => {
 	} catch (error) {
 		res.status(400).json({ success: false });
 	}
+};
+
+exports.addMarkovText = async (req, res, next) => {
+	fsExtra.emptyDir('./uploads', err => {
+		if (err) {
+			res.status(500).json({ success: false, err: err });
+			return;
+		}
+
+		const form = formidable({
+			uploadDir: './uploads',
+			multiples: true,
+			keepExtensions: true,
+		});
+
+		//@err - Error object
+		//@fields - Object - Any fields uploaded in the formData
+		//@files - Object - Any files uploaded with the formData
+		form.parse(req, (err, fields, files) => {
+			if (err !== null) {
+				res.status(500).json({ success: false, err: err });
+			}
+
+			const fileObjs = files.file.map((file, i) => {
+				return {
+					name: fields.name[i],
+					description: fields.description[i],
+					tags: fields.fileTags[i],
+					newFilename: file.newFilename,
+					originalFilename: file.originalFilename,
+				};
+			});
+
+			console.log(fileObjs);
+
+			res.json({
+				success: true,
+				msg: `files uploaded`,
+				files: files,
+				fields: fields,
+			});
+		});
+	});
+
+	// processFileUploads();
 };
