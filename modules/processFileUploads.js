@@ -1,21 +1,27 @@
 const fs = require('fs');
 
-const processData = data => {
+const findSentences = data => {
 	const regex = /([^!\.?]*[\!\.\?])/g;
+	data = removeLineEndings(data);
 	return data.match(regex);
 };
 
+const removeLineEndings = data => {
+	const regex = /\n/g;
+	return data.replace(regex, ' ');
+};
+
 module.exports = processFileUploads = fileObjs => {
-	const processedTexts = [];
+	const processedTexts = fileObjs.map((ileObj, i) => {
+		const data = fs.readFileSync(
+			`./uploads/${fileObjs[i].newFilename}`,
+			'utf-8'
+		);
+		const sentences = findSentences(data);
 
-	/* file.fileObjs.map(fileObj =>{
-
-  }) */
-
-	const data = fs.readFileSync(`./uploads/${fileObjs[0].newFilename}`, 'utf-8');
-
-	const processedData = processData(data);
-	console.log(processedData[0]);
+		console.log(sentences[0]);
+		return sentences;
+	});
 
 	return processedTexts;
 };

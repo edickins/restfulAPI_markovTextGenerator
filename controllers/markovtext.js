@@ -44,7 +44,7 @@ exports.addMarkovText = async (req, res, next) => {
 				}
 
 				// convert files.file into an Array if it is a single Object
-				files.file = [].concat(files.file);
+				files.file = [].concat(files['file[]']);
 
 				const fileObjs = files.file.map((file, i) => {
 					return {
