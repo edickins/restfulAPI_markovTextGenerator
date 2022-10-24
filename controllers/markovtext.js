@@ -3,6 +3,8 @@ const fsExtra = require('fs-extra');
 const formidable = require('formidable');
 const connectDB = require('../config/db');
 const processFileUploads = require('../modules/processFileUploads');
+const MarkovText = require('../models/MarkovText');
+const mongoose = require('mongoose');
 
 // @desc    return text generated from the default markov text sources
 // @route   GET /api/v1/markovtext
@@ -44,13 +46,13 @@ exports.addMarkovText = async (req, res, next) => {
 				}
 
 				// convert files.file into an Array if it is a single Object
-				files.file = [].concat(files['file[]']);
+				const formFiles = [].concat(files['file[]']);
 
-				const fileObjs = files.file.map((file, i) => {
+				const fileObjs = formFiles.map((file, i) => {
 					return {
 						name: fields.name[i],
 						description: fields.description[i],
-						tags: fields.fileTags[i],
+						tags: fields.tags[i],
 						newFilename: file.newFilename,
 						originalFilename: file.originalFilename,
 					};
@@ -58,11 +60,15 @@ exports.addMarkovText = async (req, res, next) => {
 
 				console.log(fileObjs);
 
-				const documents = processFileUploads(fileObjs);
+				const documentsObjs = processFileUploads(fileObjs);
+
+				MarkovText.insertMany(documentsObjs, function (err) {
+					if (err) return handleError(err);
+				});
 
 				res.status(201).json({
 					success: true,
-					msg: `files uploaded`,
+					msg: `files uploaded to database`,
 					files: files,
 					fields: fields,
 				});
