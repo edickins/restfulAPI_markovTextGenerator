@@ -26,7 +26,7 @@ const MarkovText = mongoose.Schema(
 	},
 	{
 		query: {
-			byTag(tag) {
+			byTags(tag) {
 				return this.where({ tags: new RegExp(tag, 'i') });
 			},
 		},

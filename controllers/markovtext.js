@@ -4,7 +4,6 @@ const formidable = require('formidable');
 const connectDB = require('../config/db');
 const processFileUploads = require('../modules/processFileUploads');
 const MarkovText = require('../models/MarkovText');
-const mongoose = require('mongoose');
 
 // @desc    return text generated from the default markov text sources
 // @route   GET /api/v1/markovtext
